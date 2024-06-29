@@ -1,0 +1,1 @@
+/home/nuoun/.asdf/completions/asdf.fish
