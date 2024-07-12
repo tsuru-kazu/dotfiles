@@ -9,8 +9,6 @@ set -x PATH $PATH $BREW_HOME
 set -x PATH $HOME/.anyenv/bin $PATH
 eval (anyenv init - | source)
 
-set -x GOPRIVATE "gitlab.chamo-chat.com/*"
-
 # set -x GOPROXY direct
 set -x GOPATH $HOME/go
 set -x GOROOT $HOME/.anyenv/envs/goenv/versions/1.21.1
