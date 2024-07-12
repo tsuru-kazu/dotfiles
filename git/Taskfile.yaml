@@ -1,0 +1,12 @@
+version: '3'
+
+tasks:
+  build:
+    desc: Set up Git configuration
+    cmds:
+      - |
+        if [ -f ~/.gitconfig ]; then
+          echo "Backing up existing .gitconfig"
+          mv ~/.gitconfig ~/.gitconfig.backup
+        fi
+      - ln -s ~/dotfiles/git/.gitconfig ~/.gitconfig

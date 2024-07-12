@@ -1,0 +1,12 @@
+version: '3'
+
+tasks:
+  build:
+    desc: Set up Fish shell configuration
+    cmds:
+      - |
+        if [ -d ~/.config/fish ]; then
+          echo "Backing up existing fish config"
+          mv ~/.config/fish ~/.config/fish.backup
+        fi
+      - ln -s ~/dotfiles/fish ~/.config/fish

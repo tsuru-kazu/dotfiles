@@ -1,0 +1,12 @@
+version: '3'
+
+tasks:
+  build:
+    desc: Set up Tmux configuration
+    cmds:
+      - |
+        if [ -f ~/.tmux.conf ]; then
+          echo "Backing up existing .tmux.conf"
+          mv ~/.tmux.conf ~/.tmux.conf.backup
+        fi
+      - ln -s ~/dotfiles/tmux/.tmux.conf ~/.tmux.conf
