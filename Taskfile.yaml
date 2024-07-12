@@ -1,0 +1,18 @@
+version: '3'
+
+includes:
+  nvim: ./nvim/Taskfile.yml
+  fish: ./fish/Taskfile.yml
+  git: ./git/Taskfile.yml
+  homebrew: ./homebrew/Taskfile.yml
+  tmux : ./tmux/Taskfile.yml
+
+tasks:
+  build:
+    desc: Build dotfiles
+    cmds:
+      - task: homebrew:build
+      - task: nvim:build
+      - task: fish:build
+      - task: git:build
+      - task: tmux:build
