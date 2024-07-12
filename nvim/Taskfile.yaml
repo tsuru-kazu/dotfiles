@@ -1,0 +1,12 @@
+version: '3'
+
+tasks:
+  build:
+    desc: Set up Neovim configuration
+    cmds:
+      - |
+        if [ -d ~/.config/nvim ]; then
+          echo "Backing up existing nvim config"
+          mv ~/.config/nvim ~/.config/nvim.backup
+        fi
+      - ln -s ~/dotfiles/nvim ~/.config/nvim

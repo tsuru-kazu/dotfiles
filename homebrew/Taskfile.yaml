@@ -1,0 +1,42 @@
+version: '3'
+
+tasks:
+  build:
+    desc: Set up Homebrew and install packages
+    cmds:
+      - task: install-homebrew
+      - task: install-packages
+
+  install-homebrew:
+    desc: Install Homebrew if not already installed
+    cmds:
+      - |
+        if ! command -v brew &> /dev/null; then
+          echo "Installing Homebrew..."
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        else
+          echo "Homebrew is already installed."
+        fi
+
+  install-packages:
+    desc: Install packages from Brewfile
+    cmds:
+      - |
+        if [ -f ~/dotfiles/homebrew/Brewfile ]; then
+          echo "Installing packages from Brewfile..."
+          brew bundle --file=~/dotfiles/homebrew/Brewfile
+        else
+          echo "Brewfile not found. Skipping package installation."
+        fi
+
+  update:
+    desc: Update Homebrew and upgrade packages
+    cmds:
+      - brew update
+      - brew upgrade
+      - brew cleanup
+
+  dump:
+    desc: Dump current Homebrew packages to Brewfile
+    cmds:
+      - brew bundle dump --force --file=~/dotfiles/homebrew/Brewfile
