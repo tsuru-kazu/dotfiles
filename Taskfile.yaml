@@ -1,11 +1,11 @@
 version: '3'
 
 includes:
-  nvim: ./nvim/Taskfile.yml
-  fish: ./fish/Taskfile.yml
-  git: ./git/Taskfile.yml
-  homebrew: ./homebrew/Taskfile.yml
-  tmux : ./tmux/Taskfile.yml
+  nvim: ./nvim/Taskfile.yaml
+  fish: ./fish/Taskfile.yaml
+  git: ./git/Taskfile.yaml
+  homebrew: ./homebrew/Taskfile.yaml
+  tmux : ./tmux/Taskfile.yaml
 
 tasks:
   build:
