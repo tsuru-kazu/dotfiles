@@ -22,9 +22,9 @@ tasks:
     desc: Install packages from Brewfile
     cmds:
       - |
-        if [ -f ~/dotfiles/homebrew/Brewfile ]; then
+        if [ -f homebrew/Brewfile ]; then
           echo "Installing packages from Brewfile..."
-          brew bundle --file=~/dotfiles/homebrew/Brewfile
+          brew bundle --file=homebrew/Brewfile
         else
           echo "Brewfile not found. Skipping package installation."
         fi

@@ -1,0 +1,45 @@
+name: Homebrew Update
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # 毎週日曜日の午前0時
+  workflow_dispatch:
+
+jobs:
+  update-homebrew:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Task
+        uses: arduino/setup-task@v2
+
+      - name: Install Homebrew Packages
+        run: |
+          cd homebrew
+          task install-packages
+
+      - name: Update Homebrew
+        run: |
+          cd homebrew
+          task update
+
+      - name: Check for changes
+        id: diff-check
+        run: |
+          git diff --exit-code homebrew/Brewfile.lock.json || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        if: steps.diff-check.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update Homebrew packages
+          title: 'Update Homebrew packages'
+          body: |
+            This PR updates the Homebrew packages as specified in the Brewfile.
+            
+            Automated changes by GitHub Actions.
+          branch: update-homebrew-packages
+          delete-branch: true
