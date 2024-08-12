@@ -6,8 +6,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  update-homebrew:
+  update-homebrew-and-create-pr:
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: homebrew
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -16,19 +20,15 @@ jobs:
         uses: arduino/setup-task@v2
 
       - name: Install Homebrew Packages
-        run: |
-          cd homebrew
-          task install-packages
+        run: task install-packages
 
       - name: Update Homebrew
-        run: |
-          cd homebrew
-          task update
+        run: task update
 
       - name: Check for changes
         id: diff-check
         run: |
-          git diff --exit-code homebrew/Brewfile.lock.json || echo "changes=true" >> $GITHUB_OUTPUT
+          git diff --exit-code Brewfile.lock.json || echo "changes=true" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
         if: steps.diff-check.outputs.changes == 'true'
