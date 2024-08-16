@@ -1,4 +1,4 @@
-# Dotfiles
+# dotfiles
 
 [tsuru-kazu](https://github.com/tsuru-kazu) dotfiles
 
