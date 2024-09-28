@@ -4,6 +4,7 @@ require("options")
 require("keymaps")
 require("colorschema")
 require("plugins")
+require("config.noice").setup()
 
 vim.g.coc_global_extensions = {
   'coc-solargraph',  -- Ruby

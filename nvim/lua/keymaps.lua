@@ -102,6 +102,9 @@ keymap('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<CR>
 -- カーソル位置の単語でプロジェクト内検索
 keymap('n', '<leader>fw', "<cmd>lua require('telescope.builtin').grep_string()<CR>", { noremap = true, silent = true })
 
+-- noice nvimの設定
+keymap('n', '<leader>nd', "<cmd>lua require('noice').cmd('dismiss')<CR>", { noremap = true, silent = true, desc = "Dismiss Noice Message" })
+
 -- 以下だと動かない
 -- Coc
 -- local function check_back_space()

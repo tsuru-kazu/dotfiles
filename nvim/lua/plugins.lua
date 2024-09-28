@@ -38,6 +38,9 @@ packer.init({
 	},
 })
 
+
+
+
 -- Install your plugins here
 return packer.startup(function(use)
 	-- My plugins here
@@ -90,6 +93,15 @@ return packer.startup(function(use)
           }
         }
 
+
+    -- noiceの設定
+	use({
+		"folke/noice.nvim", 
+		requires = {
+			"MunifTanjim/nui.nvim", 
+			"rcarriga/nvim-notify"
+		}
+	})
 	
 
 	-- Telescope
