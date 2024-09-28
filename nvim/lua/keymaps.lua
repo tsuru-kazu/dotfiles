@@ -90,5 +90,24 @@ keymap('n', 'tt', '<cmd>terminal<CR>', opts)
 -- 下分割でターミナルモードを起動
 keymap('n', 'tx', '<cmd>belowright new<CR><cmd>terminal<CR>', opts)
 
+-- Neotreeの起動
+keymap('n',  '<C-n>',  ':Neotree',  opts)
 
+-- 以下だと動かない
 -- Coc
+-- local function check_back_space()
+--     local col = vim.fn.col('.') - 1
+--     return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+-- end
+  
+-- -- autocomplete
+-- keymap('i', '<C-j>', 'coc#pum#visible() ? coc#pum#next(1) : "<C-j>"', opts)
+-- keymap('i', '<C-k>', 'coc#pum#visible() ? coc#pum#prev(1) : "<C-k>"', opts)
+-- keymap('i', '<Enter>', 'coc#pum#visible() ? coc#pum#confirm() : "<Enter>"', opts)
+-- keymap('i', '<Esc>', 'coc#pum#visible() ? coc#pum#cancel() : "<Esc>"', opts)
+-- keymap('i', '<C-h>', 'coc#pum#visible() ? coc#pum#cancel() : "<C-h>"', opts)
+
+-- -- <Tab>で次、<S+Tab>で前
+-- keymap('i', '<Tab>', [[coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<Tab>" : coc#refresh()]], opts)
+-- keymap('i', '<S-Tab>', [[coc#pum#visible() ? coc#pum#prev(1) : "<S-Tab>"]], opts)
+-- keymap('i', '<c-space>', 'coc#refresh()', opts)
