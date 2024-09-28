@@ -90,8 +90,10 @@ return packer.startup(function(use)
           }
         }
 
+	
+
 	-- Telescope
-	use({ "nvim-telescope/telescope.nvim" })
+	use({ "nvim-telescope/telescope.nvim", requires = { {'nvim-lua/plenary.nvim'} } })
 
 	-- Treesitter
 	use({ "nvim-telescope/telescope-file-browser.nvim" })

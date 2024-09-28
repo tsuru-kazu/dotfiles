@@ -93,6 +93,15 @@ keymap('n', 'tx', '<cmd>belowright new<CR><cmd>terminal<CR>', opts)
 -- Neotreeの起動
 keymap('n',  '<C-n>',  ':Neotree',  opts)
 
+-- Telescope
+local builtin = require('telescope.builtin')
+-- ファイル検索
+keymap('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
+-- Grepによる全文検索
+keymap('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<CR>", { noremap = true, silent = true })
+-- カーソル位置の単語でプロジェクト内検索
+keymap('n', '<leader>fw', "<cmd>lua require('telescope.builtin').grep_string()<CR>", { noremap = true, silent = true })
+
 -- 以下だと動かない
 -- Coc
 -- local function check_back_space()
