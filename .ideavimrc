@@ -1,0 +1,65 @@
+" .ideavimrc
+
+" Leader key
+let mapleader = " "
+
+" Better window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Tab navigation
+nnoremap te :tabedit<CR>
+nnoremap gn :tabnew<CR>
+nnoremap gh gT
+nnoremap gl gt
+
+" Save and quit
+nnoremap <C-s> :w<CR>
+nnoremap <C-q> :q<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
+" Split window
+nnoremap ss :split<CR>
+nnoremap sv :vsplit<CR>
+
+" Select all
+nnoremap <C-a> ggVG
+
+" Do not yank with x
+nnoremap x "_x
+
+" Delete a word backwards
+nnoremap dw vb"_d
+
+" Navigate to start/end of line
+nnoremap <Space>h ^
+nnoremap <Space>l $
+
+" Swap ; and :
+nnoremap ; :
+nnoremap : ;
+
+" Yank to end of line
+nnoremap Y y$
+
+" Force quit
+nnoremap <Space>q :q!<CR>
+
+" Clear search highlighting
+nnoremap <Esc><Esc> :nohlsearch<CR>
+
+" Insert mode mappings
+inoremap jk <Esc>
+inoremap , ,<Space>
+
+" Visual mode mappings
+vnoremap < <gv
+vnoremap > >gv
+vnoremap v $h
+
+" Paste from 0 register
+vnoremap <C-p> "0
+
