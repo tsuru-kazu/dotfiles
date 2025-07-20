@@ -1,9 +1,10 @@
 [user]
-	name = "Your Github Name"
-	email = "Your Github Email"
+	name = "tsuru-kazu"
+	email = "kz.nuoun1012@gmail.com"
 [core]
   pager = delta
   quotepath = false
+	autocrlf = false
 [delta]
   features = unobtrusive-line-numbers decorations
   whitespace-error-style = 22 reverse
@@ -38,6 +39,9 @@
   ci = commit
   ca = commit -a
   cm = commit -m
+  fu = fetch upstream
+  pul = "!git pull upstream $(git rev-parse --abbrev-ref HEAD)"
+  pus = "!git push upstream $(git rev-parse --abbrev-ref HEAD)"
   ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
   pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
   st = status
