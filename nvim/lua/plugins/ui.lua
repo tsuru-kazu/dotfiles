@@ -1,56 +1,42 @@
 return {
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "projekt0n/github-nvim-theme",
+    name = "github-theme",
     priority = 1000,
-    opts = {
-      flavour = "mocha",
-      background = {
-        light = "latte",
-        dark = "mocha",
-      },
-      transparent_background = false,
-      show_end_of_buffer = false,
-      term_colors = false,
-      dim_inactive = {
-        enabled = false,
-        shade = "dark",
-        percentage = 0.15,
-      },
-      no_italic = false,
-      no_bold = false,
-      no_underline = false,
-      styles = {
-        comments = { "italic" },
-        conditionals = { "italic" },
-        loops = {},
-        functions = {},
-        keywords = {},
-        strings = {},
-        variables = {},
-        numbers = {},
-        booleans = {},
-        properties = {},
-        types = {},
-        operators = {},
-      },
-      color_overrides = {},
-      custom_highlights = {},
-      integrations = {
-        cmp = true,
-        gitsigns = true,
-        nvimtree = true,
-        treesitter = true,
-        notify = false,
-        mini = {
-          enabled = true,
-          indentscope_color = "",
+    config = function()
+      require("github-theme").setup({
+        options = {
+          compile_path = vim.fn.stdpath("cache") .. "/github-theme",
+          compile_file_suffix = "_compiled",
+          hide_end_of_buffer = true,
+          hide_nc_statusline = true,
+          transparent = false,
+          terminal_colors = true,
+          dim_inactive = false,
+          module_default = true,
+          styles = {
+            comments = "italic",
+            functions = "NONE",
+            keywords = "bold",
+            variables = "NONE",
+            conditionals = "NONE",
+            constants = "NONE",
+            numbers = "NONE",
+            operators = "NONE",
+            strings = "NONE",
+            types = "NONE",
+          },
+          inverse = {
+            match_paren = false,
+            visual = false,
+            search = false,
+          },
         },
-      },
-    },
-    config = function(_, opts)
-      require("catppuccin").setup(opts)
-      vim.cmd.colorscheme("catppuccin")
+        palettes = {},
+        specs = {},
+        groups = {},
+      })
+      vim.cmd.colorscheme("github_dark_high_contrast")
     end,
   },
 
@@ -155,7 +141,7 @@ return {
         close_command = function(n) require("mini.bufremove").delete(n, false) end,
         right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
         diagnostics = "nvim_lsp",
-        always_show_bufferline = false,
+        always_show_bufferline = true,
         diagnostics_indicator = function(_, _, diag)
           local icons = require("lazy.core.config").icons.diagnostics
           local ret = (diag.error and icons.Error .. diag.error .. " " or "")
@@ -212,8 +198,13 @@ return {
   },
 
   {
-    "nvim-tree/nvim-web-devicons",
-    lazy = true,
+    "echasnovski/mini.icons",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("mini.icons").setup()
+      require("mini.icons").mock_nvim_web_devicons()
+    end,
   },
 
   {
