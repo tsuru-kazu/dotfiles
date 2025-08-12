@@ -187,7 +187,16 @@ return {
       }
       for name, icon in pairs(signs) do
         name = "DiagnosticSign" .. name
-        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+        vim.diagnostic.config({
+          signs = {
+            text = {
+              [vim.diagnostic.severity.ERROR] = signs.Error,
+              [vim.diagnostic.severity.WARN] = signs.Warn,
+              [vim.diagnostic.severity.HINT] = signs.Hint,
+              [vim.diagnostic.severity.INFO] = signs.Info,
+            }
+          }
+        })
       end
 
       if opts.inlay_hints.enabled then

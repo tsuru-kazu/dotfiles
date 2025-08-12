@@ -141,8 +141,17 @@ return {
 
   {
     "numToStr/Comment.nvim",
-    opts = {},
+    opts = {
+      mappings = {
+        basic = false,
+        extra = false,
+      },
+    },
     lazy = false,
+    keys = {
+      { "<leader>/", "<Plug>(comment_toggle_linewise_current)", mode = "n", desc = "Comment toggle current line" },
+      { "<leader>/", "<Plug>(comment_toggle_linewise_visual)", mode = "x", desc = "Comment toggle linewise (visual)" },
+    },
   },
 
   {
