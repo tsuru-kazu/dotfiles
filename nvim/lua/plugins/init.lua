@@ -6,4 +6,5 @@ return {
   require("plugins.treesitter"),
   require("plugins.ui"),
   require("plugins.git"),
+  require("plugins.markdown"),
 }
