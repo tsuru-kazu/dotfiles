@@ -141,13 +141,9 @@ return {
         close_command = function(n) require("mini.bufremove").delete(n, false) end,
         right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
         diagnostics = "nvim_lsp",
-        always_show_bufferline = true,
-        diagnostics_indicator = function(_, _, diag)
-          local icons = require("lazy.core.config").icons.diagnostics
-          local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-            .. (diag.warning and icons.Warn .. diag.warning or "")
-          return vim.trim(ret)
-        end,
+        always_show_bufferline = false,
+        show_buffer_close_icons = false,
+        show_close_icon = false,
         offsets = {
           {
             filetype = "neo-tree",
@@ -160,13 +156,6 @@ return {
     },
     config = function(_, opts)
       require("bufferline").setup(opts)
-      vim.api.nvim_create_autocmd("BufAdd", {
-        callback = function()
-          vim.schedule(function()
-            pcall(nvim_bufferline)
-          end)
-        end,
-      })
     end,
   },
 
@@ -294,6 +283,26 @@ return {
       large_file_overrides = {
         providers = { "lsp" },
       },
+      providers = {
+        "lsp",
+        "regex",
+      },
+      filetypes_denylist = {
+        "dirvish",
+        "fugitive",
+        "alpha",
+        "NvimTree",
+        "lazy",
+        "neogitstatus",
+        "Trouble",
+        "lir",
+        "Outline",
+        "spectre_panel",
+        "toggleterm",
+        "DressingSelect",
+        "TelescopePrompt",
+      },
+      min_count_to_highlight = 1,
     },
     config = function(_, opts)
       require("illuminate").configure(opts)
