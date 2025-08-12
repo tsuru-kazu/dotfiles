@@ -349,9 +349,17 @@ return {
               { find = "%d+L, %d+B" },
               { find = "; after #%d+" },
               { find = "; before #%d+" },
+              { find = "Node%.js v%d+%.%d+%.%d+" },
             },
           },
           view = "mini",
+        },
+        {
+          filter = {
+            event = "msg_show",
+            find = "Node%.js v%d+%.%d+%.%d+",
+          },
+          opts = { skip = true },
         },
       },
       presets = {
