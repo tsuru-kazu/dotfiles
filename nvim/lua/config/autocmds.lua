@@ -77,11 +77,3 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
-  group = augroup("auto_save"),
-  callback = function(event)
-    if vim.bo[event.buf].modified and vim.bo[event.buf].buftype == "" and vim.fn.expand("%") ~= "" then
-      vim.cmd("silent! write")
-    end
-  end,
-})

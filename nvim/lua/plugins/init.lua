@@ -7,4 +7,5 @@ return {
   require("plugins.ui"),
   require("plugins.git"),
   require("plugins.markdown"),
+  require("plugins.claudecode"),
 }

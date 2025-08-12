@@ -114,3 +114,6 @@ map("n", "<leader>cf", function()
   vim.fn.setreg("*", filename)
   print("Copied filename: " .. filename)
 end, { desc = "Copy filename" })
+
+map("n", "<leader>yw", "yiw", { desc = "Yank inner word" })
+map("n", "<leader>yW", "yaw", { desc = "Yank a word" })
