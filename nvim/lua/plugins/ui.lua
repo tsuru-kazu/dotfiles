@@ -61,13 +61,67 @@ return {
           disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
         },
         sections = {
-          lualine_a = { "mode" },
-          lualine_b = { "branch" },
+          lualine_a = { 
+            {
+              "mode",
+              color = function()
+                local gitsigns = vim.b.gitsigns_status_dict
+                local is_modified = vim.bo.modified
+                
+                -- gitsignsの変更チェックを厳密に
+                local has_git_changes = false
+                if gitsigns then
+                  has_git_changes = (gitsigns.added and gitsigns.added > 0) or
+                                  (gitsigns.changed and gitsigns.changed > 0) or
+                                  (gitsigns.removed and gitsigns.removed > 0)
+                end
+                
+                if is_modified or has_git_changes then
+                  -- 変更がある場合は赤
+                  return { fg = "#000000", bg = "#ff6666", gui = "bold" }
+                else
+                  -- 変更がない場合はデフォルトテーマを使用
+                  return {}
+                end
+              end,
+            }
+          },
+          lualine_b = { 
+            {
+              "branch",
+              color = function()
+                local gitsigns = vim.b.gitsigns_status_dict
+                local is_modified = vim.bo.modified
+                
+                -- gitsignsの変更チェックを厳密に
+                local has_git_changes = false
+                if gitsigns then
+                  has_git_changes = (gitsigns.added and gitsigns.added > 0) or
+                                  (gitsigns.changed and gitsigns.changed > 0) or
+                                  (gitsigns.removed and gitsigns.removed > 0)
+                end
+                
+                if is_modified or has_git_changes then
+                  -- 変更がある場合は赤
+                  return { fg = "#000000", bg = "#ff6666", gui = "bold" }
+                else
+                  -- 変更がない場合はデフォルトテーマを使用
+                  return {}
+                end
+              end,
+            }
+          },
 
           lualine_c = {
             {
               "filename",
               path = 1,
+              color = function()
+                if vim.bo.modified then
+                  return { fg = "#ff6b6b", gui = "bold" }
+                end
+                return {}
+              end,
             },
             {
               "diagnostics",
@@ -80,6 +134,32 @@ return {
             },
           },
           lualine_x = {
+            {
+              function()
+                local gitsigns = vim.b.gitsigns_status_dict
+                if gitsigns then
+                  local status = ""
+                  if gitsigns.added and gitsigns.added > 0 then
+                    status = status .. " +" .. gitsigns.added
+                  end
+                  if gitsigns.changed and gitsigns.changed > 0 then
+                    status = status .. " ~" .. gitsigns.changed
+                  end
+                  if gitsigns.removed and gitsigns.removed > 0 then
+                    status = status .. " -" .. gitsigns.removed
+                  end
+                  return status ~= "" and "󰊢" .. status or ""
+                end
+                return ""
+              end,
+              color = function()
+                local gitsigns = vim.b.gitsigns_status_dict
+                if gitsigns and (gitsigns.added or gitsigns.changed or gitsigns.removed) then
+                  return { fg = "#ff6b6b", gui = "bold" }
+                end
+                return { fg = "#50c878" }
+              end,
+            },
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
@@ -119,6 +199,17 @@ return {
         },
         extensions = { "nvim-tree", "lazy" },
       }
+    end,
+    config = function(_, opts)
+      require("lualine").setup(opts)
+      
+      -- ステータスラインの色を動的に更新するためのオートコマンド
+      vim.api.nvim_create_autocmd({ "BufWritePost", "TextChanged", "TextChangedI", "User" }, {
+        pattern = "*",
+        callback = function()
+          require("lualine").refresh()
+        end,
+      })
     end,
   },
 
