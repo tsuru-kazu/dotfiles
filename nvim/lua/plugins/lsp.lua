@@ -99,6 +99,18 @@ return {
             },
           },
         },
+        intelephense = {
+          settings = {
+            intelephense = {
+              files = {
+                maxSize = 5000000,
+              },
+              telemetry = {
+                enabled = false,
+              },
+            },
+          },
+        },
       },
       setup = {
         ruby_lsp = function()
@@ -280,6 +292,7 @@ return {
         "cssls",            -- CSS
         "jsonls",           -- JSON
         "yamlls",           -- YAML
+        "intelephense",     -- PHP
       },
     },
   },
