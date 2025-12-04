@@ -10,3 +10,6 @@ set -x PATH $HOME/.anyenv/bin $PATH
 eval (anyenv init - | source)
 
 alias t='tmux new-session \; split-window -v \; split-window -h \; select-pane -t 0 \; split-window -h \; select-pane -t 0'
+
+set -x GEMINI_MODEL "gemini-2.5-flash"
+set -x GOOGLE_CLOUD_PROJECT "onecareer-staging"
