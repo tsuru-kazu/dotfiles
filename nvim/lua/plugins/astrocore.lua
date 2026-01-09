@@ -174,9 +174,32 @@ return {
           end,
           desc = "Command history",
         },
+
+        -- === Vimmer必須マッピング ===
+
+        -- 行を結合するときカーソル位置を保持
+        ["J"] = { "mzJ`z", desc = "Join lines (keep cursor position)" },
+
+        -- スクロール時に中央を保持
+        ["<C-d>"] = { "<C-d>zz", desc = "Scroll down (centered)" },
+        ["<C-u>"] = { "<C-u>zz", desc = "Scroll up (centered)" },
+
+        -- xで削除してもレジスタに入れない
+        ["x"] = { '"_x', desc = "Delete char without yanking" },
+
+        -- Ex modeを無効化（誤って入ると困る）
+        ["Q"] = { "<nop>", desc = "Disable Ex mode" },
+
+        -- ペーストしたテキストを選択
+        ["gp"] = { "`[v`]", desc = "Select pasted text" },
       },
       -- インサートモード
       i = {
+        -- jjでノーマルモードに戻る
+        ["jj"] = { "<Esc>", desc = "Exit insert mode" },
+        -- jkでもノーマルモードに戻れる（jjの代替）
+        ["jk"] = { "<Esc>", desc = "Exit insert mode (alt)" },
+
         -- Ctrl+sで保存
         ["<C-s>"] = { "<cmd>w<cr><Esc>", desc = "Save file" },
 
@@ -192,6 +215,9 @@ return {
       },
       -- ビジュアルモード
       v = {
+        -- ペーストしてもレジスタを上書きしない
+        ["p"] = { '"_dP', desc = "Paste without overwriting register" },
+
         -- インデント調整（<, >でインデントを減らす/増やす）
         ["<"] = { "<gv", desc = "Decrease indent" },
         [">"] = { ">gv", desc = "Increase indent" },
