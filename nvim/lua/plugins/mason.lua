@@ -11,19 +11,21 @@ return {
       ensure_installed = {
         -- install language servers
         "lua-language-server",
-        "gopls",        -- Go language server
-        "ruby-lsp",     -- Ruby language server
+        "gopls", -- Go language server
+        "ruby-lsp", -- Ruby language server
 
         -- install formatters
         "stylua",
-        "gofumpt",      -- Go formatter (enhanced gofmt)
-        "rubocop",      -- Ruby formatter and linter
+        "gofumpt", -- Go formatter (enhanced gofmt)
+        "rubocop", -- Ruby formatter and linter
 
         -- install debuggers
         "debugpy",
 
         -- install any other package
         "tree-sitter-cli",
+
+        "marksman",
       },
     },
   },
