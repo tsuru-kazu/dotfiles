@@ -46,7 +46,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      require("github-theme").setup({
+      require("github-theme").setup {
         -- 新しい設定形式
         options = {
           -- 透過設定（必要に応じて）
@@ -72,7 +72,7 @@ return {
         -- カスタムハイライト（必要に応じて）
         -- specs = {},
         -- groups = {},
-      })
+      }
     end,
   },
 
@@ -210,5 +210,16 @@ return {
         Rule("a", "a", "-vim")
       )
     end,
+  },
+
+  -- マークダウン
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
   },
 }
