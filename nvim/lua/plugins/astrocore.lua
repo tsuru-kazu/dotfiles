@@ -103,7 +103,11 @@ return {
 
         -- === よく使うキーマップ ===
 
-        -- ファイル操作（<Leader>w と <Leader>q はAstroNvimのデフォルトで設定済み）
+        -- ファイル操作
+        ["<Leader>q"] = {
+          function() require("astrocore.buffer").close() end,
+          desc = "Close current buffer",
+        },
         ["<Leader>wq"] = { "<cmd>wq<cr>", desc = "Save and quit" },
 
         -- ウィンドウ操作（Ctrl+h/j/k/lでウィンドウ間を移動）
