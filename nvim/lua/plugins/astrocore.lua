@@ -109,6 +109,7 @@ return {
           desc = "Close current buffer",
         },
         ["<Leader>wq"] = { "<cmd>wq<cr>", desc = "Save and quit" },
+        ["<Leader>qq"] = { "<cmd>q<cr>", desc = "Quit neovim" },
 
         -- ウィンドウ操作（Ctrl+h/j/k/lでウィンドウ間を移動）
         ["<C-h>"] = { "<C-w>h", desc = "Move to left window" },
