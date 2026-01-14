@@ -103,6 +103,16 @@ return {
 
         -- === よく使うキーマップ ===
 
+        -- oil.nvimでファイルエクスプローラーを開く
+        ["<Leader>e"] = {
+          function() require("oil").open() end,
+          desc = "Open file explorer (oil.nvim)",
+        },
+        ["-"] = {
+          function() require("oil").open() end,
+          desc = "Open parent directory (oil.nvim)",
+        },
+
         -- ファイル操作
         ["<Leader>q"] = {
           function() require("astrocore.buffer").close() end,

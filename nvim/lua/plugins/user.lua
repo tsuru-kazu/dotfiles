@@ -81,6 +81,15 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
+      -- LSPの設定（lsp_signature.nvimと競合するため無効化）
+      lsp = {
+        hover = {
+          enabled = false,
+        },
+        signature = {
+          enabled = false,
+        },
+      },
       -- コマンドラインの設定
       cmdline = {
         enabled = true, -- コマンドラインUIを有効化
@@ -145,27 +154,80 @@ return {
     },
   },
 
-  -- === Neo-tree: 隠しファイルを表示 ===
+  -- === Neo-tree: 無効化（oil.nvimを使用） ===
   {
     "nvim-neo-tree/neo-tree.nvim",
+    enabled = false,
+  },
+
+  -- === Oil.nvim: バッファベースのファイルエクスプローラー ===
+  {
+    "stevearc/oil.nvim",
+    lazy = false,
     opts = {
-      filesystem = {
-        filtered_items = {
-          visible = true, -- 隠しファイルを表示
-          hide_dotfiles = false, -- .で始まるファイルを非表示にしない
-          hide_gitignored = false, -- gitignoreされたファイルを非表示にしない
-          hide_by_name = {
-            -- 特定のファイル名を非表示にしたい場合はここに追加
-            -- ".DS_Store",
-            -- "thumbs.db"
-          },
-          never_show = {
-            -- 絶対に表示したくないファイル
-            -- ".git",
-          },
-        },
+      -- デフォルトのファイルエクスプローラー設定
+      default_file_explorer = true,
+      -- カラム表示設定
+      columns = {
+        "icon",
+        -- "permissions",
+        -- "size",
+        -- "mtime",
+      },
+      -- バッファ設定
+      buf_options = {
+        buflisted = false,
+        bufhidden = "hide",
+      },
+      -- ウィンドウ設定
+      win_options = {
+        wrap = false,
+        signcolumn = "no",
+        cursorcolumn = false,
+        foldcolumn = "0",
+        spell = false,
+        list = false,
+        conceallevel = 3,
+        concealcursor = "nvic",
+      },
+      -- 削除時の確認
+      delete_to_trash = false,
+      skip_confirm_for_simple_edits = false,
+      -- プロンプトでファイル操作を保存
+      prompt_save_on_select_new_entry = true,
+      -- ゴミ箱コマンド（macOSの場合）
+      cleanup_delay_ms = 2000,
+      -- キーマップ
+      keymaps = {
+        ["g?"] = "actions.show_help",
+        ["<CR>"] = "actions.select",
+        ["<C-s>"] = "actions.select_vsplit",
+        ["<C-h>"] = "actions.select_split",
+        ["<C-t>"] = "actions.select_tab",
+        ["<C-p>"] = "actions.preview",
+        ["<C-c>"] = "actions.close",
+        ["<C-l>"] = "actions.refresh",
+        ["-"] = "actions.parent",
+        ["_"] = "actions.open_cwd",
+        ["`"] = "actions.cd",
+        ["~"] = "actions.tcd",
+        ["gs"] = "actions.change_sort",
+        ["gx"] = "actions.open_external",
+        ["g."] = "actions.toggle_hidden",
+        ["g\\"] = "actions.toggle_trash",
+      },
+      -- 隠しファイルを表示
+      view_options = {
+        show_hidden = true,
+        is_hidden_file = function(name, bufnr)
+          return vim.startswith(name, ".")
+        end,
+        is_always_hidden = function(name, bufnr)
+          return false
+        end,
       },
     },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
   -- You can disable default plugins as follows:
