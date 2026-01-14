@@ -61,6 +61,10 @@ return {
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
+        -- navigate tabs
+        ["]t"] = { "<cmd>tabnext<cr>", desc = "Next tab" },
+        ["[t"] = { "<cmd>tabprevious<cr>", desc = "Previous tab" },
+
         -- mappings seen under group name "Buffer"
         ["<Leader>bd"] = {
           function()
@@ -121,11 +125,11 @@ return {
         ["<Leader>wq"] = { "<cmd>wq<cr>", desc = "Save and quit" },
         ["<Leader>qq"] = { "<cmd>q<cr>", desc = "Quit neovim" },
 
-        -- ウィンドウ操作（Ctrl+h/j/k/lでウィンドウ間を移動）
-        ["<C-h>"] = { "<C-w>h", desc = "Move to left window" },
-        ["<C-j>"] = { "<C-w>j", desc = "Move to bottom window" },
-        ["<C-k>"] = { "<C-w>k", desc = "Move to top window" },
-        ["<C-l>"] = { "<C-w>l", desc = "Move to right window" },
+        -- ウィンドウ操作（Ctrl+aプレフィックスでzellij競合を回避）
+        ["<C-a>h"] = { "<C-w>h", desc = "Move to left window" },
+        ["<C-a>j"] = { "<C-w>j", desc = "Move to bottom window" },
+        ["<C-a>k"] = { "<C-w>k", desc = "Move to top window" },
+        ["<C-a>l"] = { "<C-w>l", desc = "Move to right window" },
 
         -- ウィンドウサイズ調整
         ["<Leader>="] = { "<C-w>=", desc = "Equalize window sizes" },

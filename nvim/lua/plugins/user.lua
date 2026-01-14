@@ -197,16 +197,16 @@ return {
       prompt_save_on_select_new_entry = true,
       -- ゴミ箱コマンド（macOSの場合）
       cleanup_delay_ms = 2000,
-      -- キーマップ
+      -- キーマップ（Ctrl+aプレフィックスでzellij競合を回避）
       keymaps = {
         ["g?"] = "actions.show_help",
         ["<CR>"] = "actions.select",
-        ["<C-s>"] = "actions.select_vsplit",
-        ["<C-h>"] = "actions.select_split",
-        ["<C-t>"] = "actions.select_tab",
-        ["<C-p>"] = "actions.preview",
-        ["<C-c>"] = "actions.close",
-        ["<C-l>"] = "actions.refresh",
+        ["<C-a>v"] = "actions.select_vsplit",
+        ["<C-a>s"] = "actions.select_split",
+        ["<C-a>t"] = "actions.select_tab",
+        ["<C-a>p"] = "actions.preview",
+        ["<C-a>c"] = "actions.close",
+        ["<C-a>r"] = "actions.refresh",
         ["-"] = "actions.parent",
         ["_"] = "actions.open_cwd",
         ["`"] = "actions.cd",
