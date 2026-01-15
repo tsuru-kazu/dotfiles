@@ -2,7 +2,7 @@ alias g "git"
 alias lzd 'lazydocker'
 alias gl "cd (ghq root)/(ghq list | peco)"
 alias lg "lazygit"
-alias vi "nvim"
+alias vv "nvim ."
 alias cs "cursor ."
 alias zl "zellij"
 

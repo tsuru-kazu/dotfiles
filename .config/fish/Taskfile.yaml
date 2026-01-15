@@ -9,4 +9,4 @@ tasks:
           echo "Backing up existing fish config"
           mv ~/.config/fish ~/.config/fish.backup
         fi
-      - ln -s ~/dotfiles/fish ~/.config/fish
+      - ln -s ~/dotfiles/.config/fish ~/.config/fish

@@ -1,18 +1,36 @@
 version: '3'
 
 includes:
-  nvim: ./nvim/Taskfile.yaml
-  fish: ./fish/Taskfile.yaml
-  git: ./git/Taskfile.yaml
-  homebrew: ./homebrew/Taskfile.yaml
-  tmux : ./tmux/Taskfile.yaml
+  nvim: ./.config/nvim/Taskfile.yaml
+  fish: ./.config/fish/Taskfile.yaml
+  tmux: ./.config/tmux/Taskfile.yaml
 
 tasks:
   build:
     desc: Build dotfiles
     cmds:
-      - task: homebrew:build
+      - task: homebrew
       - task: nvim:build
       - task: fish:build
-      - task: git:build
       - task: tmux:build
+      - task: home
+
+  homebrew:
+    desc: Install Homebrew packages
+    cmds:
+      - brew bundle --file=~/dotfiles/Brewfile
+
+  home:
+    desc: Set up home directory dotfiles
+    cmds:
+      - |
+        for file in ~/dotfiles/home/.*; do
+          filename=$(basename "$file")
+          if [ "$filename" != "." ] && [ "$filename" != ".." ]; then
+            if [ -f ~/"$filename" ] || [ -L ~/"$filename" ]; then
+              echo "Backing up existing $filename"
+              mv ~/"$filename" ~/"$filename".backup
+            fi
+            ln -s "$file" ~/"$filename"
+          fi
+        done
