@@ -9,23 +9,31 @@ return {
     opts = {
       -- Make sure to use the names found in `:Mason`
       ensure_installed = {
-        -- install language servers
+        -- Lua
         "lua-language-server",
-        "gopls", -- Go language server
-        "ruby-lsp", -- Ruby language server
-
-        -- install formatters
         "stylua",
+
+        -- Go
+        "gopls", -- Go language server
         "gofumpt", -- Go formatter (enhanced gofmt)
+        "goimports", -- Go import organizer
+        "golangci-lint", -- Go linter
+        "delve", -- Go debugger
+
+        -- Ruby
+        "solargraph", -- Ruby language server
         "rubocop", -- Ruby formatter and linter
 
-        -- install debuggers
-        "debugpy",
+        -- TypeScript/JavaScript
+        "vtsls", -- TypeScript language server
+        "prettierd", -- Fast Prettier daemon for formatting
+        "js-debug-adapter", -- JavaScript/TypeScript debugger
 
-        -- install any other package
-        "tree-sitter-cli",
-
+        -- Markdown
         "marksman",
+
+        -- Other tools
+        "tree-sitter-cli",
       },
     },
   },

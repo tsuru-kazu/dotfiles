@@ -7,5 +7,7 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.typescript" }, -- TypeScript/JavaScript support
+  { import = "astrocommunity.pack.ruby" }, -- Ruby support (solargraph LSP, rubocop, etc)
+  { import = "astrocommunity.pack.go" }, -- Go support (gopls LSP, gofmt, goimports, etc)
   -- import/override with your plugins folder
 }
