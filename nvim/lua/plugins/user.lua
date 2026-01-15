@@ -164,7 +164,23 @@ return {
   {
     "stevearc/oil.nvim",
     lazy = false,
-    opts = {
+    opts = function()
+      -- 相対パスをコピーするカスタムアクション
+      local function copy_relative_path()
+        local oil = require("oil")
+        local entry = oil.get_cursor_entry()
+        local dir = oil.get_current_dir()
+        if not entry or not dir then
+          vim.notify("No entry under cursor", vim.log.levels.WARN)
+          return
+        end
+        local abs_path = dir .. entry.name
+        local relative_path = vim.fn.fnamemodify(abs_path, ":.")
+        vim.fn.setreg("+", relative_path)
+        vim.notify("Copied: " .. relative_path, vim.log.levels.INFO)
+      end
+
+      return {
       -- デフォルトのファイルエクスプローラー設定
       default_file_explorer = true,
       -- カラム表示設定
@@ -215,6 +231,7 @@ return {
         ["gx"] = "actions.open_external",
         ["g."] = "actions.toggle_hidden",
         ["g\\"] = "actions.toggle_trash",
+        ["gy"] = copy_relative_path,
       },
       -- 隠しファイルを表示
       view_options = {
@@ -226,7 +243,8 @@ return {
           return false
         end,
       },
-    },
+    }
+    end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
