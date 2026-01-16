@@ -29,6 +29,9 @@ return {
         "prettierd", -- Fast Prettier daemon for formatting
         "js-debug-adapter", -- JavaScript/TypeScript debugger
 
+        -- Vue
+        "vue-language-server", -- Vue language server (Volar)
+
         -- Markdown
         "marksman",
 
