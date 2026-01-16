@@ -6,13 +6,14 @@ alias vv "nvim ."
 alias cs "cursor ."
 alias zl "zellij"
 
-set -x BREW_HOME /home/linuxbrew/.linuxbrew/bin
-set -x PATH $PATH $BREW_HOME
+# Homebrew
+eval (/opt/homebrew/bin/brew shellenv)
 
-set -x PATH $HOME/.anyenv/bin $PATH
-eval (anyenv init - | source)
+# windows
+set -x BREW_HOME /home/linuxbrew/.linuxbrew/bin                                                                                               │
+set -x PATH $PATH $BREW_HOM
 
-alias t='tmux new-session \; split-window -v \; split-window -h \; select-pane -t 0 \; split-window -h \; select-pane -t 0'
+# anyenv
+# anyenv init - fish | source
 
-set -x GEMINI_MODEL "gemini-2.5-flash"
-set -x GOOGLE_CLOUD_PROJECT "onecareer-staging"
+status --is-interactive; and source (anyenv init -|psub)
