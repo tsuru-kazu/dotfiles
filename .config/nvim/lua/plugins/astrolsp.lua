@@ -38,6 +38,7 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
+      "volar",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
@@ -45,6 +46,7 @@ return {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
       -- TypeScript/JavaScript LSP configuration
       vtsls = {
+        filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
         settings = {
           typescript = {
             updateImportsOnFileMove = { enabled = "always" },
@@ -60,6 +62,17 @@ return {
           },
           vtsls = {
             autoUseWorkspaceTsdk = true,
+            tsserver = {
+              globalPlugins = {
+                {
+                  name = "@vue/typescript-plugin",
+                  location = vim.fn.stdpath("data") .. "/mason/packages/vue-language-server/node_modules/@vue/typescript-plugin",
+                  languages = { "vue" },
+                  configNamespace = "typescript",
+                  enableForWorkspaceTypeScriptVersions = true,
+                },
+              },
+            },
           },
         },
       },
@@ -70,7 +83,7 @@ return {
       -- function(server, opts) require("lspconfig")[server].setup(opts) end
 
       -- the key is the server that is being setup with `lspconfig`
-      -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
+      ts_ls = false, -- disable ts_ls; using vtsls instead to avoid conflicts
       -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end -- or a custom handler function can be passed
     },
     -- Configure buffer local auto commands to add when attaching a language server
