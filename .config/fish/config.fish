@@ -16,6 +16,8 @@ set -x PATH $PATH $BREW_HOM
 # anyenv
 # anyenv init - fish | source
 
+set -x CLAUDE_CODE_EFFORT_LEVEL max
+
 status --is-interactive; and source (anyenv init -|psub)
 
 function y
@@ -26,3 +28,4 @@ function y
 	end
 	rm -f -- "$tmp"
 end
+export PATH="$HOME/.local/bin:$PATH"
