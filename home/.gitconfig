@@ -59,6 +59,12 @@
   find = "!f() { git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative -S'pretty' -S\"$@\" | peco | awk '{print $1}' | xargs -I {} git diff {}^ {}; }; f"
   # edit conflicted file on merge
   edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+  # worktree
+  wl = worktree list
+  wa = worktree add
+  wr = worktree remove
+  wp = worktree prune
+  wm = "!f() { git worktree add \"${1}\" -b \"${2:-$(basename $1)}\"; }; f"
 [ghq]
   root=~/workspace
 [credential]
