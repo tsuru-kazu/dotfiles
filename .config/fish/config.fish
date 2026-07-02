@@ -1,17 +1,14 @@
 alias g "git"
 alias lzd 'lazydocker'
-alias gl "cd (ghq root)/(ghq list | peco)"
+alias ghr "gh api --paginate /user/repos --jq '.[].full_name' | fzf"
+alias gl "cd \$(ghq root)/\$(ghq list | fzf)"
 alias lg "lazygit"
 alias vv "nvim ."
-alias cs "cursor ."
+alias zz "zed ."
 alias zl "zellij"
 
 # Homebrew
 eval (/opt/homebrew/bin/brew shellenv)
-
-# windows
-set -x BREW_HOME /home/linuxbrew/.linuxbrew/bin                                                                                               │
-set -x PATH $PATH $BREW_HOM
 
 # anyenv
 # anyenv init - fish | source
@@ -28,4 +25,14 @@ function y
 	end
 	rm -f -- "$tmp"
 end
+
+# 各種ツールのバイナリを読み込む
 export PATH="$HOME/.local/bin:$PATH"
+
+# zoxide
+zoxide init fish | source
+
+# ezaの設定
+alias ls='eza --icons --group-directories-first'
+alias ll='eza -la --icons --group-directories-first --git'
+alias lt='eza --tree --level=2 --icons'
