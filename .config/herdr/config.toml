@@ -1,0 +1,266 @@
+# herdr の設定ファイル
+# このファイルは ~/.config/herdr/config.toml に配置する
+
+# 起動時に初回セットアップ用の通知を表示する。
+# 未設定の場合もオンボーディングが表示される。選択済みなら false にする。
+# onboarding = true
+
+[theme]
+# 組み込みテーマ: catppuccin, terminal, tokyo-night, dracula, nord,
+#                  gruvbox, one-dark, solarized, kanagawa, rose-pine,
+#                  vesper
+# name = "catppuccin"
+
+# 端末のライト/ダーク設定に追従して Herdr の UI テーマを切り替える。
+# true にしない限り既存の手動切り替えの動作は変わらない。
+# auto_switch = false
+# dark_name = "catppuccin"
+# light_name = "catppuccin-latte"
+
+# ベーステーマの上に個別のカラートークンを上書きする。
+# 指定可能: hex (#rrggbb)、色名、rgb(r,g,b)、または panel_bg = "reset"
+# [theme.custom]
+# panel_bg = "reset"
+# accent = "#f5c2e7"
+# red = "#ff6188"
+# green = "#a6e3a1"
+
+[terminal]
+# 新しい対話用ペインで使用する実行ファイル。
+# 空の場合は $SHELL、なければ /bin/sh を使用する。
+# default_shell = ""
+
+# 新しい対話用ペインシェルの起動モード: "auto", "login", "non_login" のいずれか。
+# "auto" は macOS ではログインシェルを使用し、それ以外では現状の動作を維持する。
+# shell_mode = "auto"
+
+# --cwd が明示的に指定されなかった場合の、新規ペイン/タブ/ワークスペースの作業ディレクトリ方針。
+# "follow" は元のペイン/ワークスペースを継承、"home" は $HOME、
+# "current" は Herdr プロセスのディレクトリ、または "~/Projects" のような固定パスも指定可能。
+# new_cwd = "follow"
+
+[update]
+# バックグラウンドのバージョンチェックと `herdr update` で使用する更新チャンネル。
+# 通常リリースは "stable"、opt-in のプレビュービルドは "preview" を使用する。
+# channel = "stable"
+
+# バックグラウンドで herdr.dev に新しい Herdr バージョンがあるか確認する。
+# version_check = true
+
+# バックグラウンドで herdr.dev のリモートエージェント検出マニフェストの更新を確認する。
+# manifest_check = true
+
+[keys]
+# prefix モードに入るための prefix キー (デフォルト: "ctrl+b")
+# 例: "ctrl+b", "f12", "esc", "-"
+# アクションのバインドは明示的な記法を使う: "prefix+n" は prefix が必須、
+# "ctrl+alt+n" は prefix 不要の直接ショートカット。
+# 使用可能なキー記法: 通常のキー、ctrl/shift/alt/cmd/super の修飾キー、
+# enter/tab/esc/left/right/up/down などの特殊キー。
+# minus, comma, ampersand, plus, backtick のような記号名も使用可能。
+# 最も安定して動作するのは ctrl+文字、ファンクションキー、明示的な修飾キーの組み合わせ。
+# alt+..., cmd/super、記号+修飾キーの組み合わせは端末/tmux の設定に依存する場合がある。
+prefix = "ctrl+a"
+
+# prefix モードのアクション
+# help = "prefix+?"
+# settings = "prefix+s"
+# detach = "prefix+q"
+# reload_config = "prefix+shift+r"
+# open_notification_target = "prefix+o"
+# workspace_picker = "prefix+w"
+# goto = "prefix+g"
+# new_workspace = "prefix+shift+n"
+# new_worktree = "prefix+shift+g"
+open_worktree = "prefix+shift+o"    # 任意設定、デフォルトは未設定
+remove_worktree = "prefix+shift+u"  # 任意設定、デフォルトは未設定。実行時に確認ダイアログが開く
+# rename_workspace = "prefix+shift+w"
+# close_workspace = "prefix+shift+d"
+# previous_workspace = "" # 任意設定、デフォルトは未設定
+# next_workspace = ""     # 任意設定、デフォルトは未設定
+# previous_agent = ""     # 任意設定、デフォルトは未設定
+# next_agent = ""         # 任意設定、デフォルトは未設定
+# focus_agent = ""        # 任意のインデックス指定バインド、例: "prefix+alt+1..9"
+# remote_image_paste = "ctrl+v" # herdr --remote でのみ有効。空にすると raw-key での画像ペーストを無効化
+# new_tab = "prefix+c"
+# rename_tab = "prefix+shift+t"
+# previous_tab = "prefix+p"
+# next_tab = "prefix+n"
+# switch_tab = "prefix+1..9"
+# switch_workspace = ""   # 任意のインデックス指定バインド、例: "prefix+shift+1..9"
+# close_tab = "prefix+shift+x"
+# rename_pane = "prefix+shift+p"
+# edit_scrollback = "prefix+e"
+# focus_pane_left = "prefix+h"
+# focus_pane_down = "prefix+j"
+# focus_pane_up = "prefix+k"
+# focus_pane_right = "prefix+l"
+# cycle_pane_next = "prefix+tab"
+# cycle_pane_previous = "prefix+shift+tab"
+# last_pane = ""          # 任意設定、デフォルトは未設定。例えば "prefix+tab" を割り当てるとグローバルなトグル移動になる
+# split_vertical = "prefix+v"
+# split_horizontal = "prefix+minus"
+# close_pane = "prefix+x"
+# zoom = "prefix+z"       # 旧名: fullscreen
+# resize_mode = "prefix+r"
+# toggle_sidebar = "prefix+b"
+
+# ナビゲートモード中の移動。ナビゲートモードが開いている間はこのローカルショートカットが優先される。
+# focus_pane_* とは独立している。ここには prefix+、esc、enter、tab、1..9 を含めないこと。
+# navigate_workspace_up = "up"
+# navigate_workspace_down = "down"
+# navigate_pane_left = "h"      # 左矢印キーは常に左のペインにフォーカスする
+# navigate_pane_down = "j"
+# navigate_pane_up = "k"
+# navigate_pane_right = "l"     # 右矢印キーは常に右のペインにフォーカスする
+
+# カスタムコマンドも同じバインド記法を使用する。
+# type = "shell" はバックグラウンドで detached 実行する。
+# type = "pane" は一時的なペインを開き、コマンド終了時にそのペインを閉じる。
+# [[keys.command]]
+# key = "prefix+alt+g"
+# type = "pane"
+# command = "lazygit"
+
+# 旧形式のインデックス指定ショートカット設定も互換性のために読み込まれる。
+# 新しい設定では switch_tab, switch_workspace, focus_agent を優先すること。
+# [keys.indexed]
+# tabs = ""       # 例: "ctrl" にすると ctrl+1..9 で直接タブを切り替えられる
+# workspaces = "" # 例: "ctrl+shift" にすると ctrl+shift+1..9 で直接ワークスペースを切り替えられる
+# agents = ""     # 例: "alt" にすると alt+1..9 で直接エージェント行にフォーカスできる
+
+# [worktrees]
+# directory = "~/.herdr/worktrees"
+
+[ui]
+# サイドバー幅 (ワークスペース名に応じて自動調整されるが、これがデフォルト値になる)
+# sidebar_width = 26
+
+# サイドバー展開時の最小幅 (カラム数)
+# sidebar_min_width = 18
+
+# サイドバー展開時の最大幅 (カラム数)
+# sidebar_max_width = 36
+
+# この幅以下になると Herdr はモバイル用の単一カラムレイアウトを使用する。
+# 折りたたみ端末やタブレット、横幅の広いスマートフォン端末ではこの値を大きくする。
+# mobile_width_threshold = 64
+
+# Herdr のマウス UI のためにマウス入力をキャプチャする。
+# 端末側で通常のクリック (Cmd クリックによる URL オープンなど) を処理させたい場合は false にする。
+# lazygit や btop のようなペインアプリは、要求があれば false でもマウス入力を受け取れる。
+# mouse_capture = true
+
+# 右クリックの長押し/ドラッグ操作を、Herdr のペインメニューを開く代わりにペインアプリへ転送する任意の修飾キー。
+# 空/off で無効化。Shift は端末側で Shift+マウスを予約していることが多いため意図的に非対応。
+# right_click_passthrough_modifier = ""
+
+# 外部端末がフォーカスを取り戻したときに全体を再描画する。
+# Herdr に戻った際のちらつきを減らしたい場合は false にする。
+# トレードオフ: 稀に外部端末の表示崩れが次の全体再描画まで残ることがある。
+# redraw_on_focus_gained = true
+
+# マウスホイール1ノッチあたりにスクロールするペインのスクロールバック行数。
+# mouse_scroll_lines = 3
+
+# ワークスペースを閉じる前に確認を求める
+# confirm_close = true
+
+# 新規タブ作成前にタブ名の入力を求める。
+# false にすると生成された名前で即座にタブを作成する。
+# prompt_new_tab_name = true
+
+# 分割ペインの周囲に枠線を描画する。
+# pane_borders = true
+
+# 分割ペインで境界線を共有せず、視覚的に分離した状態を保つ。
+# pane_gaps = true
+
+# 手動でペイン名が設定されていない場合、検出/報告されたエージェントのラベルを分割ペインの枠線に表示する。
+show_agent_labels_on_pane_borders = true
+
+# エージェントパネルの並び順: "spaces" (スペースごとにグループ化) または "priority" (対応待ち順)。
+# "workspaces" は "spaces" の別名として使用可能。
+agent_panel_sort = "priority"
+
+# ハイライト、枠線、ナビゲーション UI 用のアクセントカラー。
+# 指定可能: hex (#89b4fa)、色名 (cyan, blue, magenta)、rgb(r,g,b)
+# accent = "cyan"
+
+# バックグラウンド通知のポップアップ配信方法
+[ui.toast]
+# off = ポップアップ通知を無効化
+# herdr = アプリ内トーストを表示
+# terminal = 外部端末にデスクトップ通知の表示を依頼
+# system = OS の通知サービスに直接依頼
+delivery = "herdr"
+# delay_seconds = 1
+
+[ui.toast.herdr]
+# position = "bottom-right"
+
+[ui.toast.clipboard]
+# enabled = true
+# position = "bottom-center"
+
+# バックグラウンドのワークスペースでエージェントの状態が変化したときに音を再生する
+[ui.sound]
+enabled = true
+# カスタムの mp3 音声ファイル (任意)。相対パスはこの設定ファイルのディレクトリから解決される。
+# path = "sounds/notification.mp3"   # すべての通知に使用する単一の mp3 ファイル
+# done_path = "sounds/done.mp3"      # 完了通知のみを上書き
+# request_path = "sounds/request.mp3" # 対応待ち通知のみを上書き
+
+# エージェントごとの上書き設定: default | on | off
+# デフォルトでは droid はミュートされている。
+# [ui.sound.agents]
+# droid = "off"
+
+[session]
+# Herdr サーバー再起動後、対応しているAIエージェントのペインをそれぞれのネイティブな会話セッションへ復元する。
+# セッション参照を報告する公式インテグレーションが必要。
+resume_agents_on_restore = true
+
+[remote]
+# `herdr --remote` のブリッジで使用する ssh 設定を herdr が管理するかどうか。
+# true (デフォルト) の場合、herdr はまず ~/.ssh/config を読み込み、
+# その後フォールバックとして ServerAliveInterval/ServerAliveCountMax を追加した
+# 生成済み設定経由でブリッジ ssh を実行する (自分で keepalive を設定していればそちらが優先される)。
+# これによりアイドル状態のネットワーク/NAT タイムアウトを乗り越えられる。
+# false にすると ssh 設定を変更せずそのまま使用する — keepalive を強制的に無効にするわけではなく、
+# herdr が独自の設定を追加しなくなるだけ。
+# manage_ssh_config = true
+
+[experimental]
+# herdr 管理下のペインの中から herdr を起動できるようにする。
+# allow_nested = false
+# 接続中のクライアント向けの実験的なローカル Kitty グラフィックスレンダリング。
+# Kitty グラフィックス対応の外部端末が必要。
+# kitty_graphics = false
+# サーバーの完全再起動をまたいで、直近のペインの画面履歴を保存する。
+pane_history = false
+# prefix モードが有効な間、macOS のホスト入力ソースを一時的に
+# ASCII 入力可能なキーボードレイアウトに切り替え、CJK IME が有効な状態でも
+# prefix コマンドを認識できるようにする。prefix モード終了時に元の入力ソースに戻す。
+# macOS 専用、ベストエフォート。デフォルト: false。
+# switch_ascii_input_source_in_prefix = false
+# TUI が独自にカーソルを描画している場合 (Claude Code, pi, codex) でも、
+# macOS の入力メソッドが候補ウィンドウの追跡を続けられるように、
+# フォーカス中のペインのカーソルを外部端末に公開する。
+# トレードオフ: カーソルを隠したまま代替を描画しないアプリ (vim のノーマルモードなど) では、
+# 余分なカーソルが表示されてしまう。
+# reveal_hidden_cursor_for_cjk_ime = false
+# 任意の許可リスト: 検出されたエージェントがこのリストに含まれるペインにフォーカスしている場合のみ公開する。
+# 空の場合はフォーカス中のどのペインにも適用される。
+# リストに有効な名前が1つも含まれない場合、公開は適用されない。
+# 指定可能: pi, claude, codex, gemini, cursor, devin, cline, opencode,
+# copilot, kimi, kiro, droid, amp, grok, hermes, kilo, qodercli, qoder。
+# cjk_ime_agents = []
+# reveal_hidden_cursor_for_cjk_ime が true のときに表示するカーソル形状。
+# 指定可能: block, steady_block (デフォルト), underline, steady_underline, bar, steady_bar。
+# cjk_ime_cursor_shape = "steady_block"
+
+[advanced]
+# 各ペイン端末ごとに保持する最大スクロールバックバッファサイズ (バイト単位)。
+# Ghostty のデフォルトの scrollback-limit の挙動に合わせている。
+# scrollback_limit_bytes = 10000000
