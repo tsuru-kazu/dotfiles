@@ -1,0 +1,235 @@
+# ~/.config/aerospace/aerospace.toml
+# docs: https://nikitabobko.github.io/AeroSpace/guide
+# commands: https://nikitabobko.github.io/AeroSpace/commands
+#
+# 修飾キーは Option = alt
+# フォーカス: alt-h/j/k/l  移動: alt-shift-h/j/k/l  WS: alt-1..9
+# 詳細はリポジトリ外の対話、または公式ガイドを参照
+
+config-version = 2
+
+start-at-login = true
+auto-reload-config = true
+
+# 変な入れ子レイアウトを自動で直す。特殊な理由がなければ true
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+accordion-padding = 30
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# モニタを跨いだときマウスを中央へ（i3 相当）
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# フォーカスした窓へマウスを追従させる場合は次を有効化
+# on-focus-changed = ['move-mouse window-lazy-center']
+
+# Cmd-H で隠したアプリをすぐ戻す（誤爆対策）
+automatically-unhide-macos-hidden-apps = true
+
+persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+key-mapping.preset = 'qwerty'
+focus-follows-mouse.enabled = false
+
+# 隙間。SketchyBar を使うなら outer.top を 40〜60 に
+gaps.inner.horizontal = 8
+gaps.inner.vertical = 8
+gaps.outer.left = 8
+gaps.outer.bottom = 8
+gaps.outer.top = 8
+gaps.outer.right = 8
+
+# JankyBorders（フォーカス中の窓に枠）。二重起動は borders 側で抑止される
+after-startup-command = [
+    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=9.0'
+]
+
+# マルチモニタで WS を固定したいとき。名前は `aerospace list-monitors`
+# [workspace-to-monitor-force-assignment]
+#     1 = 'main'
+#     2 = ['built-in', 'secondary']
+
+# ------------------------------------------------------------
+# キーバインド
+# ------------------------------------------------------------
+[mode.main.binding]
+    cmd-h = []
+    cmd-alt-h = []
+
+    # レイアウト
+    alt-slash = 'layout tiles horizontal vertical'
+    alt-comma = 'layout accordion horizontal vertical'
+    alt-f = 'fullscreen'
+    alt-shift-f = 'layout floating tiling'
+    alt-0 = 'balance-sizes'
+
+    # フォーカス / 移動（Vim 風、端でループ）
+    alt-h = 'focus --wrap-around left'
+    alt-j = 'focus --wrap-around down'
+    alt-k = 'focus --wrap-around up'
+    alt-l = 'focus --wrap-around right'
+
+    alt-shift-h = 'move left'
+    alt-shift-j = 'move down'
+    alt-shift-k = 'move up'
+    alt-shift-l = 'move right'
+
+    # 隣の窓と位置を入れ替え（フォーカスは維持）
+    alt-ctrl-h = 'swap --wrap-around left'
+    alt-ctrl-j = 'swap --wrap-around down'
+    alt-ctrl-k = 'swap --wrap-around up'
+    alt-ctrl-l = 'swap --wrap-around right'
+
+    # サイズ
+    alt-minus = 'resize smart -50'
+    alt-equal = 'resize smart +50'
+
+    # ワークスペース
+    alt-1 = 'workspace 1'
+    alt-2 = 'workspace 2'
+    alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
+    alt-5 = 'workspace 5'
+    alt-6 = 'workspace 6'
+    alt-7 = 'workspace 7'
+    alt-8 = 'workspace 8'
+    alt-9 = 'workspace 9'
+
+    alt-left = 'workspace --wrap-around prev'
+    alt-right = 'workspace --wrap-around next'
+
+    # 窓を送って追従する
+    alt-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
+    alt-shift-2 = 'move-node-to-workspace --focus-follows-window 2'
+    alt-shift-3 = 'move-node-to-workspace --focus-follows-window 3'
+    alt-shift-4 = 'move-node-to-workspace --focus-follows-window 4'
+    alt-shift-5 = 'move-node-to-workspace --focus-follows-window 5'
+    alt-shift-6 = 'move-node-to-workspace --focus-follows-window 6'
+    alt-shift-7 = 'move-node-to-workspace --focus-follows-window 7'
+    alt-shift-8 = 'move-node-to-workspace --focus-follows-window 8'
+    alt-shift-9 = 'move-node-to-workspace --focus-follows-window 9'
+
+    alt-tab = 'workspace-back-and-forth'
+    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+    # モニタ間
+    alt-ctrl-left = 'focus-monitor --wrap-around left'
+    alt-ctrl-right = 'focus-monitor --wrap-around right'
+    alt-ctrl-shift-left = 'move-node-to-monitor --focus-follows-window --wrap-around left'
+    alt-ctrl-shift-right = 'move-node-to-monitor --focus-follows-window --wrap-around right'
+
+    # アプリ起動
+    alt-enter = '''exec-and-forget osascript -e '
+tell application "Ghostty"
+    new window
+end tell' '''
+    alt-b = 'exec-and-forget open -a "Google Chrome"'
+
+    alt-shift-semicolon = 'mode service'
+    alt-r = 'mode resize'
+
+[mode.service.binding]
+    esc = ['reload-config', 'mode main']
+    r = ['flatten-workspace-tree', 'mode main']
+    f = ['layout floating tiling', 'mode main']
+    b = ['balance-sizes', 'mode main']
+    backspace = ['close-all-windows-but-current', 'mode main']
+
+    alt-shift-h = ['join-with left', 'mode main']
+    alt-shift-j = ['join-with down', 'mode main']
+    alt-shift-k = ['join-with up', 'mode main']
+    alt-shift-l = ['join-with right', 'mode main']
+
+[mode.resize.binding]
+    h = 'resize width -50'
+    l = 'resize width +50'
+    j = 'resize height +50'
+    k = 'resize height -50'
+    minus = 'resize smart -50'
+    equal = 'resize smart +50'
+    b = 'balance-sizes'
+    enter = 'mode main'
+    esc = 'mode main'
+
+# ------------------------------------------------------------
+# アプリ自動振り分け
+# bundle id は `aerospace list-apps` で確認
+# ------------------------------------------------------------
+
+# --- float（ダイアログ・ユーティリティ） ---
+[[on-window-detected]]
+    if.app-id = 'com.apple.systempreferences'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.calculator'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.ActivityMonitor'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.1password.1password'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.finder'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.AppStore'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.raycast.macos'
+    run = 'layout floating'
+
+# 1: ブラウザ
+[[on-window-detected]]
+    if.app-id = 'com.google.Chrome'
+    run = 'move-node-to-workspace 1'
+
+# 2: エディタ
+[[on-window-detected]]
+    if.app-id = 'com.todesktop.230313mzl4w4u92'
+    run = 'move-node-to-workspace 2'
+
+# 3: ターミナル
+[[on-window-detected]]
+    if.app-id = 'com.mitchellh.ghostty'
+    run = 'move-node-to-workspace 3'
+
+# 4: チャット
+[[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap'
+    run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+    if.app-id = 'jp.naver.line.mac'
+    run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+    if.app-id = 'com.hnc.Discord'
+    run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.MobileSMS'
+    run = 'move-node-to-workspace 4'
+
+# 5: メモ / AI
+[[on-window-detected]]
+    if.app-id = 'notion.id'
+    run = 'move-node-to-workspace 5'
+
+[[on-window-detected]]
+    if.app-id = 'com.anthropic.claudefordesktop'
+    run = 'move-node-to-workspace 5'
+
+# 6: ミーティング
+[[on-window-detected]]
+    if.app-id = 'us.zoom.xos'
+    run = 'move-node-to-workspace 6'
+
