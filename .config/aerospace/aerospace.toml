@@ -25,8 +25,10 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # フォーカスした窓へマウスを追従させる場合は次を有効化
 # on-focus-changed = ['move-mouse window-lazy-center']
 
-# Cmd-H で隠したアプリをすぐ戻す（誤爆対策）
-automatically-unhide-macos-hidden-apps = true
+# true だと Discord の × が「隠す」扱いのため、閉じてすぐ再表示される
+# Discord は窓を閉じず macOS の Hide を使う既知の挙動
+# Cmd-H 自体は下の cmd-h = [] で無効化済み
+automatically-unhide-macos-hidden-apps = false
 
 persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
