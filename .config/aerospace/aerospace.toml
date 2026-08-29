@@ -155,81 +155,36 @@ end tell' '''
 
 # ------------------------------------------------------------
 # アプリ自動振り分け
+# 先にマッチしたルールで打ち切り。最後の catch-all でそれ以外を float
 # bundle id は `aerospace list-apps` で確認
 # ------------------------------------------------------------
 
-# --- float（ダイアログ・ユーティリティ） ---
-[[on-window-detected]]
-    if.app-id = 'com.apple.systempreferences'
-    run = 'layout floating'
-
-[[on-window-detected]]
-    if.app-id = 'com.apple.calculator'
-    run = 'layout floating'
-
-[[on-window-detected]]
-    if.app-id = 'com.apple.ActivityMonitor'
-    run = 'layout floating'
-
-[[on-window-detected]]
-    if.app-id = 'com.1password.1password'
-    run = 'layout floating'
-
-[[on-window-detected]]
-    if.app-id = 'com.apple.finder'
-    run = 'layout floating'
-
-[[on-window-detected]]
-    if.app-id = 'com.apple.AppStore'
-    run = 'layout floating'
-
-[[on-window-detected]]
-    if.app-id = 'com.raycast.macos'
-    run = 'layout floating'
-
-# 1: ブラウザ
-[[on-window-detected]]
-    if.app-id = 'com.google.Chrome'
-    run = 'move-node-to-workspace 1'
-
-# 2: エディタ
-[[on-window-detected]]
-    if.app-id = 'com.todesktop.230313mzl4w4u92'
-    run = 'move-node-to-workspace 2'
-
-# 3: ターミナル
-[[on-window-detected]]
-    if.app-id = 'com.mitchellh.ghostty'
-    run = 'move-node-to-workspace 3'
-
-# 4: チャット
+# 1: Slack / Notion
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap'
-    run = 'move-node-to-workspace 4'
+    run = ['layout tiling', 'move-node-to-workspace 1']
 
-[[on-window-detected]]
-    if.app-id = 'jp.naver.line.mac'
-    run = 'move-node-to-workspace 4'
-
-[[on-window-detected]]
-    if.app-id = 'com.hnc.Discord'
-    run = 'move-node-to-workspace 4'
-
-[[on-window-detected]]
-    if.app-id = 'com.apple.MobileSMS'
-    run = 'move-node-to-workspace 4'
-
-# 5: メモ / AI
 [[on-window-detected]]
     if.app-id = 'notion.id'
-    run = 'move-node-to-workspace 5'
+    run = ['layout tiling', 'move-node-to-workspace 1']
 
+# 2: Chrome
 [[on-window-detected]]
-    if.app-id = 'com.anthropic.claudefordesktop'
-    run = 'move-node-to-workspace 5'
+    if.app-id = 'com.google.Chrome'
+    run = ['layout tiling', 'move-node-to-workspace 2']
 
-# 6: ミーティング
+# 3: Ghostty
 [[on-window-detected]]
-    if.app-id = 'us.zoom.xos'
-    run = 'move-node-to-workspace 6'
+    if.app-id = 'com.mitchellh.ghostty'
+    run = ['layout tiling', 'move-node-to-workspace 3']
+
+# 4: Cursor
+[[on-window-detected]]
+    if.app-id = 'com.todesktop.230313mzl4w4u92'
+    run = ['layout tiling', 'move-node-to-workspace 4']
+
+# 上記以外はすべてフロート
+[[on-window-detected]]
+    if = 'true'
+    run = 'layout floating'
 
