@@ -10,15 +10,33 @@ tasks:
     desc: Build dotfiles
     cmds:
       - task: homebrew
-      - task: nvim:build
-      - task: fish:build
-      - task: tmux:build
+      - task: config
       - task: home
 
   homebrew:
     desc: Install Homebrew packages
     cmds:
       - brew bundle --file=~/dotfiles/Brewfile
+
+  config:
+    desc: Set up ~/.config dotfiles
+    cmds:
+      - |
+        mkdir -p ~/.config
+        for dir in ~/dotfiles/.config/*; do
+          if [ -d "$dir" ]; then
+            target_name=$(basename "$dir")
+            target=~/.config/"$target_name"
+            if [ -L "$target" ]; then
+              rm "$target"
+            elif [ -d "$target" ] || [ -f "$target" ]; then
+              echo "Backing up existing $target_name to $target_name.backup"
+              mv "$target" "$target".backup
+            fi
+            ln -s "$dir" "$target"
+            echo "Linked $target_name to ~/.config/$target_name"
+          fi
+        done
 
   home:
     desc: Set up home directory dotfiles
@@ -27,10 +45,14 @@ tasks:
         for file in ~/dotfiles/home/.*; do
           filename=$(basename "$file")
           if [ "$filename" != "." ] && [ "$filename" != ".." ]; then
-            if [ -f ~/"$filename" ] || [ -L ~/"$filename" ]; then
-              echo "Backing up existing $filename"
-              mv ~/"$filename" ~/"$filename".backup
+            target=~/"$filename"
+            if [ -L "$target" ]; then
+              rm "$target"
+            elif [ -f "$target" ] || [ -d "$target" ]; then
+              echo "Backing up existing $filename to $filename.backup"
+              mv "$target" "$target".backup
             fi
-            ln -s "$file" ~/"$filename"
+            ln -s "$file" "$target"
+            echo "Linked $filename to ~/$filename"
           fi
         done
