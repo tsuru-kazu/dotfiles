@@ -35,6 +35,10 @@ return {
         -- Markdown
         "marksman",
 
+        -- YAML / TOML（Taskfile, aerospace など）
+        "yaml-language-server",
+        "taplo",
+
         -- Other tools
         "tree-sitter-cli",
       },
