@@ -7,6 +7,9 @@ alias vv "nvim ."
 alias zz "zed ."
 alias zl "zellij"
 
+# emacs
+fish_add_path ~/.config/emacs/bin
+
 # Homebrew
 eval (/opt/homebrew/bin/brew shellenv)
 
