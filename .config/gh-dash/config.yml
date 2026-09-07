@@ -98,10 +98,10 @@ theme:
             warning: "#f38ba8"
             success: "#a6e3a1"
         background:
-            selected: "#cba6f7"
+            selected: "#45475a"
         border:
             primary: "#6c7086"
-            secondary: "#45475a"
+            secondary: "#585b70"
             faint: "#313244"
         icon:
             newcontributor: "#f9e2af"
